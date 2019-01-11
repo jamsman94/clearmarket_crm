@@ -5,7 +5,7 @@ import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history } from 'fun'
 import Api from 'api'
 import { Card, Breadcrumb} from 'antd';
-import ContactTable from './ContactTable'
+import VerifyStats from './verifyStats'
 
 class HomeView extends React.Component {
   static propTypes = {}
@@ -15,13 +15,13 @@ class HomeView extends React.Component {
       <React.Fragment>
         <Breadcrumb style={{ margin: '10px 0' }}>
           <Breadcrumb.Item>系统</Breadcrumb.Item>
-          <Breadcrumb.Item>联系我们</Breadcrumb.Item>
+          <Breadcrumb.Item>认证分析</Breadcrumb.Item>
         </Breadcrumb>
         <Card
           hoverable
           style={{ minHeight:400 }}
         >
-          <ContactTable />
+          <VerifyStats />
         </Card>
       </React.Fragment>
     )

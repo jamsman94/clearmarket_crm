@@ -10,7 +10,7 @@ class HomeView extends React.Component {
   state = {
     renderList: []
   }
-  componentDidMount() {
+  componentDidMount () {
     console.log(this.props)
     window.updateData = this.updateData
     this.updateData()
@@ -22,18 +22,29 @@ class HomeView extends React.Component {
     Api.queryContacts(queryObj)
       .then(res => {
         console.log(res.data)
-        const {data = []} = res
+        const { data = []} = res
         this.setState({
-          rederList:data.map((v, i) => {
+          renderList:data.map((v, i) => {
             v.key = i
             return v
           })
         })
+        console.log('done')
+      })
+  }
+  tagAsRead=(data) => {
+    const queryObj = {
+      id: data
+    }
+    Api.updateContacts(queryObj)
+      .then(res => {
+        console.log(res)
       })
   }
   render=() => {
-    const {renderList = []} = this.state
-    const conlumns = [{
+    const { renderList = [] } = this.state
+    console.log(renderList)
+    const columns = [{
       title: '公司名称',
       dataIndex: 'company',
       key: 'company'
@@ -62,8 +73,48 @@ class HomeView extends React.Component {
     }, {
       title: '联系信息',
       dataIndex: 'msg',
-      key: 'msg'
+      key: 'msg',
+      render: (data) => {
+        if (data === null) {
+          return '暂无'
+        } else {
+          return data
+        }
+      }
+    }, {
+      title: '联系时间',
+      dataIndex: 'createTime',
+      key: 'createTime',
+      render: (data) => formatDate(data)
+    }, {
+      title: '处理时间',
+      dataIndex: 'updateTime',
+      key: 'updateTime',
+      render: (data) => formatDate(data)
+    }, {
+      title: '已读/未读',
+      dataIndex: 'flag',
+      key: 'flag',
+      render: (data) => {
+        if (data === true) {
+          return '已处理'
+        } else {
+          return '未处理'
+        }
+      }
+    }, {
+      title: '处理',
+      render: (text, record) => {
+        return <a onClick={() => {
+          // console.log(record.id)
+          this.tagAsRead(record.id)
+          this.updateData()
+        }} >处理</a>
+      }
     }]
+    return (
+      <Table dataSource={renderList} columns={columns} />
+    )
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView)

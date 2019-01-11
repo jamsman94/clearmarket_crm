@@ -11,6 +11,7 @@ import trade from './trade'
 import listsl from './list'
 import czqk from './czqk'
 import contact from './contact'
+import verify from './verify'
 const baseURL = hostConfig.baseURL
 const reqArr = []
 // 实例化 ajax请求对象
@@ -91,7 +92,8 @@ const API = {
   ...market(xhr),
   ...trade(xhr),
   ...czqk(xhr),
-  ...contact(xhr())
+  ...contact(xhr()),
+  ...verify(xhr())
 }
 window.ar = xhr()
 export default API
