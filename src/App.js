@@ -6,6 +6,7 @@ import PageLayout from '@/components/PageLayout'
 import { LoadingView } from '@/components/handleCommon'
 import base from './routes/index'
 import Home from './routes/Home/index'
+import Login from './components/Login'
 
 class App extends React.Component {
   static propTypes = {
@@ -22,6 +23,7 @@ class App extends React.Component {
           <LoadingView />
           <HashRouter>
             <Switch>
+              <Route path='/login' component={Login} />
               <Route path='/' render={({ match }) => (
                 <PageLayout>
                   <Route exact path={match.url} component={Home} />

@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { message } from 'antd'
+import { message } from 'antd'
 import * as Cookies from 'js-cookie'
 import login from './login'
 import counter from './counter'
@@ -10,6 +10,7 @@ import market from './market'
 import trade from './trade'
 import listsl from './list'
 import czqk from './czqk'
+import contact from './contact'
 const baseURL = hostConfig.baseURL
 const reqArr = []
 // 实例化 ajax请求对象
@@ -30,15 +31,9 @@ const xhr = url => {
       reqArr.push('小美女')
       const { url } = config
       const reqUrl = url.replace(/.*\//, '')
-      const token = (Cookies.get('token') || '').replace(/"/g, '')
-      if (token !== '') {
-        const javaToken = (Cookies.get('Authorization') || '').replace(/"/g, '')
-        config.headers['X-Access-Token'] = token
-        config.headers['Authorization'] = `Bearer ${javaToken}`
-        if (reqUrl !== 'notifications') {
-          changeStyle('block')
-        }
-      }
+      const token = (sessionStorage.getItem('token') || '').replace(/"/g, '')
+
+      token && (config.headers['X-Access-Token'] = token)
       // 在这儿做一些请求头的设置
       return config
     }, (error) => {
@@ -58,20 +53,28 @@ const xhr = url => {
       const data = response.data
       // TODO
       data.headers = response.headers
+
+      const {status} = data
+      const msg = data.message
+      if (+status === 401) {
+        history.push('/login')
+      } else if (+status !== 1){
+        message.error(msg)
+      }
       return data
     }, (error) => {
-      const { response } = error
-      const { data, status } = response
-      reqArr.length = 0
-      changeStyle()
-      if (+status === 401) {
-        alertModal.error(`用户未登录`)
-        Promise.resolve().then(() => Cookies.remove('token'))
-          .then(() => Cookies.remove('userInfor'))
-          .then(() => history.push('/login'))
-        return Promise.reject(error)
-      }
-      alertModal.error(data.error)
+      // const { response } = error
+      // const { data, status } = response
+      // reqArr.length = 0
+      // changeStyle()
+      // if (+status === 401) {
+      //   alertModal.error(`用户未登录`)
+      //   Promise.resolve().then(() => Cookies.remove('token'))
+      //     .then(() => Cookies.remove('userInfor'))
+      //     .then(() => history.push('/login'))
+      //   return Promise.reject(error)
+      // }
+      // alertModal.error(data.error)
       return Promise.reject(error)
     })
   return ajaxinstance
@@ -87,7 +90,8 @@ const API = {
   ...counter(xhr()),
   ...market(xhr),
   ...trade(xhr),
-  ...czqk(xhr)
+  ...czqk(xhr),
+  ...contact(xhr())
 }
 window.ar = xhr()
 export default API

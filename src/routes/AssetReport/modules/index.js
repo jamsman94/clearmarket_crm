@@ -1,15 +1,9 @@
-import { UPDATE_DATA, ADD, REQ, CHANGETYPE } from './action'
+import { UPDATE_DATA, ADD, REQ } from './action'
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [CHANGETYPE]    : (state, action) => {
-    return {
-      ...state,
-      type:action.payload
-    }
-  },
   [UPDATE_DATA]    : (state, action) => {
     return {
       ...state,
@@ -27,8 +21,7 @@ const ACTION_HANDLERS = {
       ...state,
       list:action.payload
     }
-  },
-
+  }
 }
 
 // ------------------------------------
@@ -36,8 +29,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   count:0,
-  list:[],
-  type:'login'
+  list:[]
 }
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

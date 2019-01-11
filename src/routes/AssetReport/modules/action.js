@@ -5,16 +5,9 @@ import Api from 'api'
 export const UPDATE_DATA = Symbol('刷新数据')
 export const ADD = Symbol('累加')
 export const REQ = Symbol('数据请求事例')
-export const CHANGETYPE = Symbol('切换登录或注册')
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const changeType = (data) => {
-  return {
-    type: CHANGETYPE,
-    payload: data
-  }
-}
 export const updateData = (data = 0) => {
   return {
     type: UPDATE_DATA,

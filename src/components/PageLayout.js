@@ -28,6 +28,11 @@ class Auth extends React.Component {
     this.setState({ collapsed })
   }
   render () {
+    const platformId = sessionStorage.getItem('platformId')
+    console.log(platformId)
+    if (platformId === null){
+      history.push('/login')
+    }
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
@@ -39,7 +44,7 @@ class Auth extends React.Component {
           <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
             <SubMenu
               key='sub1'
-              title={<span><Icon type='user' /><span>User</span></span>}
+              title={<span><Icon type='user' /><span>系统管理</span></span>}
             >
               <Menu.Item key='3' onClick={() => history.push('/example')}>例子</Menu.Item>
               <Menu.Item key='4'>Bill</Menu.Item>
@@ -47,21 +52,18 @@ class Auth extends React.Component {
             </SubMenu>
             <SubMenu
               key='sub2'
-              title={<span><Icon type='team' /><span>Team</span></span>}
+              title={<span><Icon type='team' /><span>平台管理</span></span>}
             >
-              <Menu.Item key='6'>Team 1</Menu.Item>
-              <Menu.Item key='8'>Team 2</Menu.Item>
+              <Menu.Item key='6' onClick={() => history.push('/asset-report')}>资金录入</Menu.Item>
+              <Menu.Item key='8' onClick={() => history.push('/trade-history')}>交易历史</Menu.Item>
+              <Menu.Item key='9' onClick={() => history.push('/contact')}>联系我们管理</Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            {/* <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb> */}
-            <div style={{ padding: 24, minHeight: 360 }}>
+            <div style={{ padding: 10, minHeight: 360 }}>
               {this.props.children}
             </div>
           </Content>

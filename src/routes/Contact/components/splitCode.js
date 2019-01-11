@@ -4,7 +4,7 @@ import Loading from 'components/Loading'
 // 功能首页
 export const HomePage = (
   Loadable({
-    loader: () => import('./tmpl/homePage'),
+    loader: () => import('./ContactPage/homePage'),
     loading: Loading
   })
 )

@@ -6,7 +6,7 @@ import Loading from 'components/Loading'
 
 export default (store) => {
   const reducer = require('./modules').default
-  injectReducer(store, { key: 'login', reducer })
+  injectReducer(store, { key: 'assetReport', reducer })
   return Loadable({
     loader: () => import('./containers/index'),
     loading: Loading

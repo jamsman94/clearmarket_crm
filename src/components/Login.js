@@ -4,7 +4,7 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd'
 // import * as Cookies from 'js-cookie'
 import './component'
 import { history } from 'components/handleFun'
-// import Api from 'api'
+import Api from 'api'
 const FormItem = Form.Item
 class Login extends React.Component {
   static propTypes={
@@ -15,12 +15,21 @@ class Login extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const obj = {
-          email:values.userName,
-          password:values.password
+          oprId:'admin',
+          oprPwd:111111,
+          platformId: '1000'
         }
-        Promise.resolve()
-        .then(() => console.log(obj))
-        .then(() => history.push('/'))
+        // Promise.resolve()
+        // .then(() => console.log(obj))
+        // .then(() => Api.getLoginInfo(obj))
+        // .then(() => history.push('/'))
+        Api.getLoginInfo(obj)
+          .then(res=> {
+            console.log(res)
+            sessionStorage.setItem('token', res.data.token)
+            sessionStorage.setItem('platformId', res.data.platform)
+            history.push('/')
+          })
       }
     })
   }
@@ -31,7 +40,7 @@ class Login extends React.Component {
         <div className='login-side'>
           <Form onSubmit={this.handleSubmit} className='login-form'>
             <FormItem>
-              {getFieldDecorator('userName', {
+              {getFieldDecorator('oprId', {
                 rules: [{ required: true, message: '请输入用户名' }],
               })(
                 <Input prefix={
@@ -41,7 +50,7 @@ class Login extends React.Component {
           )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator('password', {
+              {getFieldDecorator('oprPwd', {
                 rules: [{ required: true, message: '请输入密码' }],
               })(
                 <Input prefix={
@@ -60,8 +69,8 @@ class Login extends React.Component {
               <a className='login-form-forgot' href=''>忘记密码</a>
               <div />
               <Button type='primary' htmlType='submit' className='login-form-button'>
-            登录
-          </Button>
+                登录
+              </Button>
             </FormItem>
           </Form>
         </div>
