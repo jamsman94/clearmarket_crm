@@ -2,10 +2,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import propTypes from 'prop-types'
-import { HomePage, Test } from './splitCode'
+import { HomePage } from './splitCode'
 const Main = ({ match }) => (
   <React.Fragment>
-    <Route path={`${match.url}/:id`} component={Test} />
     <Route exact path={`${match.url}`} component={HomePage} />
   </React.Fragment>
 )
