@@ -5,7 +5,6 @@ import propTypes from 'prop-types'
 import { HomePage, Test } from './splitCode'
 const Main = ({ match }) => (
   <React.Fragment>
-    <Route path={`${match.url}/:id`} component={Test} />
     <Route exact path={`${match.url}`} component={HomePage} />
   </React.Fragment>
 )
