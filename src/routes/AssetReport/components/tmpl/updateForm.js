@@ -11,30 +11,6 @@ import Api from 'api'
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
 
-const residences = [{
-  value: 'zhejiang',
-  label: 'Zhejiang',
-  children: [{
-    value: 'hangzhou',
-    label: 'Hangzhou',
-    children: [{
-      value: 'xihu',
-      label: 'West Lake',
-    }],
-  }],
-}, {
-  value: 'jiangsu',
-  label: 'Jiangsu',
-  children: [{
-    value: 'nanjing',
-    label: 'Nanjing',
-    children: [{
-      value: 'zhonghuamen',
-      label: 'Zhong Hua Men',
-    }],
-  }],
-}];
-
 class RegistrationForm extends React.Component {
   state = {
     confirmDirty: false,
@@ -108,7 +84,9 @@ class RegistrationForm extends React.Component {
             >
               {getFieldDecorator('assets', {
                 rules: [{
-                  required: true, message: '请输入资产!',
+                  required: true,
+                  min: 100,
+                  message: '请输入正确资产!',
                 }],
               })(
                 <Input />

@@ -29,7 +29,7 @@ class HomeView extends React.Component {
             return v
           })
         })
-        console.log('done')
+        // console.log('done')
       })
   }
   tagAsRead=(data) => {
@@ -43,7 +43,7 @@ class HomeView extends React.Component {
   }
   render=() => {
     const { renderList = [] } = this.state
-    console.log(renderList)
+    // console.log(renderList)
     const columns = [{
       title: '公司名称',
       dataIndex: 'company',

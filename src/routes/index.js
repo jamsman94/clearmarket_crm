@@ -7,6 +7,7 @@ import AssetReport from './AssetReport'
 import TradeHistory from './TradeHistory'
 import Contact from './Contact'
 import Verify from './verify'
+import Report from './Report'
 export default store => (
   <React.Fragment>
     <Route path='/asset-report' component={AssetReport(store)} />
@@ -15,5 +16,6 @@ export default store => (
     <Route path='/contact' component={Contact(store)} />
     <Route path='/example' component={Exm(store)} />
     <Route path='/counter' component={Counter(store)} />
+    <Route path='/report' component={Report(store)} />
   </React.Fragment>
 )

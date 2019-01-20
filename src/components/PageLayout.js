@@ -48,13 +48,14 @@ class Auth extends React.Component {
             >
               <Menu.Item key='1' onClick={() => history.push('/contact')}>联系我们</Menu.Item>
               <Menu.Item key='2' onClick={() => history.push('/verify')}>认证分析</Menu.Item>
+              <Menu.Item key='3' onClick={() => history.push('/report')}>举报查询</Menu.Item>
             </SubMenu>
             <SubMenu
               key='sub2'
               title={<span><Icon type='team' /><span>平台管理</span></span>}
             >
               <Menu.Item key='6' onClick={() => history.push('/asset-report')}>资金录入</Menu.Item>
-              <Menu.Item key='8' onClick={() => history.push('/trade-history')}>交易历史</Menu.Item>
+              {/*<Menu.Item key='8' onClick={() => history.push('/trade-history')}>交易历史</Menu.Item>*/}
             </SubMenu>
           </Menu>
         </Sider>
