@@ -40,6 +40,16 @@ class Login extends React.Component {
         <div className='login-side'>
           <Form onSubmit={this.handleSubmit} className='login-form'>
             <FormItem>
+              {getFieldDecorator('platformId', {
+                rules: [{ required: true, message: '请输入平台号' }],
+              })(
+                <Input prefix={
+                  <Icon type='laptop'
+                        style={{ color: 'rgba(0,0,0,.25)' }}
+                  />} placeholder='平台号' />
+              )}
+            </FormItem>
+            <FormItem>
               {getFieldDecorator('oprId', {
                 rules: [{ required: true, message: '请输入用户名' }],
               })(
