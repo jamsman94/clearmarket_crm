@@ -10,23 +10,21 @@ class HomeView extends React.Component {
   state = {
     renderList: []
   }
+
   componentDidMount () {
-    console.log(this.props)
-    this.updateData()
+    // console.log(this.props)
+    // this.updateData()
+    window.reportReq = this.updateData
   }
-  updateData =(platformId) => {
-    let queryObj = null
-    if (platformId !== null) {
-      queryObj = {
-        page: 1,
-        platformId: sessionStorage.getItem('platformId')
-      }
-    } else {
-      queryObj = {
-        page: 1,
-        platformId: platformId
-      }
+
+  updateData = (obj={}) => {
+
+    const queryObj = {
+      platformId: '',
+      page: 1,
+      ...obj
     }
+
     Api.queryReport(queryObj)
       .then(res => {
         console.log(res.data)
@@ -39,19 +37,12 @@ class HomeView extends React.Component {
         })
       })
   }
-  render =() => {
-    const { renderList = [] } = this.state
+  render = () => {
+    const {renderList = []} = this.state
     const columns = [{
-      title: '联系平台',
-      dataIndex: 'platformId',
-      key: 'platformId',
-      render: (data) => {
-        if (data === 1001) {
-          return '天厚投资'
-        } else {
-          return '未知平台'
-        }
-      }
+      title: '举报平台',
+      dataIndex: 'rename',
+      key: 'rename'
     }, {
       title: '举报者ID',
       dataIndex: 'accountId',
@@ -86,7 +77,7 @@ class HomeView extends React.Component {
       render: (data) => formatDate(data)
     }]
     return (
-      <Table dataSource={renderList} columns={columns} />
+      <Table dataSource={renderList} columns={columns}/>
     )
   }
 }

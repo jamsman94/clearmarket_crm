@@ -24,7 +24,7 @@ class Login extends React.Component {
         // .then(() => Api.getLoginInfo(obj))
         // .then(() => history.push('/'))
         Api.getLoginInfo(obj)
-          .then(res=> {
+          .then(res => {
             console.log(res)
             sessionStorage.setItem('token', res.data.token)
             sessionStorage.setItem('platformId', res.data.platform)
@@ -45,7 +45,7 @@ class Login extends React.Component {
               })(
                 <Input prefix={
                   <Icon type='laptop'
-                        style={{ color: 'rgba(0,0,0,.25)' }}
+                    style={{ color: 'rgba(0,0,0,.25)' }}
                   />} placeholder='平台号' />
               )}
             </FormItem>

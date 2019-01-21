@@ -12,12 +12,12 @@ class HomeView extends React.Component {
   }
   componentDidMount () {
     // console.log(this.props)
-    window.assetsReq= this.getData
+    window.assetsReq = this.getData
     window.closeModal = this.handleOk
     this.getData()
   }
   render =() => {
-    const {renderList=[]}=this.state
+    const { renderList = [] } = this.state
     const columns = [{
       title: '平台名称',
       dataIndex: 'platformId',
@@ -43,26 +43,26 @@ class HomeView extends React.Component {
 
     }, {
       title: '操作',
-      render: (text,record)=>{
+      render: (text, record) => {
         return <a onClick={this.showModal}>修改</a>
       }
     }]
     return (
       <React.Fragment>
-        <Button type='primary' style={{marginBottom: '10px', alignItems: 'right'}}>增加新平台</Button>
+        <Button type='primary' style={{ marginBottom: '10px', alignItems: 'right' }}>增加新平台</Button>
         <Table dataSource={renderList} columns={columns} />
         <div>
-          {/*<Button type="primary" onClick={this.showModal}>*/}
-          {/*Open Modal*/}
-          {/*</Button>*/}
+          {/* <Button type="primary" onClick={this.showModal}> */}
+          {/* Open Modal */}
+          {/* </Button> */}
           <Modal
-            title="修改账户资产"
+            title='修改账户资产'
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
             footer={[]}
           >
-            <UpdateForm></UpdateForm>
+            <UpdateForm />
           </Modal>
         </div>
       </React.Fragment>

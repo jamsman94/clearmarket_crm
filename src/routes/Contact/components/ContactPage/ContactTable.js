@@ -22,7 +22,7 @@ class HomeView extends React.Component {
     Api.queryContacts(queryObj)
       .then(res => {
         console.log(res.data)
-        const { data = []} = res
+        const { data = [] } = res
         this.setState({
           renderList:data.map((v, i) => {
             v.key = i

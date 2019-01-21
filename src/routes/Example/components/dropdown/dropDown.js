@@ -1,40 +1,53 @@
 import React from 'react'
-import { Menu, Dropdown, Button, Icon, message, } from 'antd'
+import { Menu, Dropdown, Button, Icon, message, Select } from 'antd'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispatchToProps} from '../../containers';
+import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import Api from 'api'
-
+const Option = Select.Option
 class HomeView extends React.Component {
-  state = {}
-  componentDidMount () {
-    console.log(this.props)
+  state = {
+    platformList: []
   }
 
-  render=() => {
-    function handleButtonClick(e) {
-      message.info('Click on left button.');
-      console.log('click left button', e);
-    }
+  componentDidMount () {
+    this.getPlatformList()
 
-    function handleMenuClick(e) {
-      message.info('Click on menu item.');
-      console.log('click', e);
-    }
+  }
 
-    const menu = (
-      <Menu onClick={handleMenuClick}>
-        <Menu.Item key="1"><Icon type="user" />1000 - CM</Menu.Item>
-        <Menu.Item key="2"><Icon type="user" />1001 - TH</Menu.Item>
-        <Menu.Item key="3"><Icon type="user" />3rd item</Menu.Item>
-      </Menu>
-    )
+  getPlatformList = () => {
+    Api.platformList()
+      .then(res => {
+        const {data = []} = res
+        this.setState({
+          platformList: data
+        })
+        window.reportReq && window.reportReq({platformId: sessionStorage.getItem('platformId')})
+        // if (data[0]) {
+        //   window.reportReq && window.reportReq({
+        //     platformId: data[0].platformId
+        //   })
+        // }
+      })
+  }
+
+  handleChange = (e) => {
+    // message.info('Click on menu item.')
+    console.log(e)
+    const platformId = e
+    window.reportReq && window.reportReq({platformId})
+  }
+  render = () => {
+    const {platformList = []} = this.state
     return (<div>
-      <Dropdown overlay={menu} style={{marginBottom: 10}}>
-        <Button style={{ marginLeft: 8 }}>
-          平台选择 <Icon type="down" />
-        </Button>
-      </Dropdown>
+      <Select style={{width: 120}} onChange={this.handleChange} placeholder='请选择'>
+        <Option value='0'>请选择</Option>
+        {
+          platformList.map((v, i) => (
+            <Option key={v.platformId} selected={i === 0} value={v.platformId}>{v.platformId}-{v.rename}</Option>
+          ))
+        }
+      </Select>
     </div>)
   }
 }

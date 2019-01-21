@@ -13,11 +13,11 @@ class HomeView extends React.Component {
   }
   componentDidMount () {
     // console.log(this.props)
-    window.assetsReq= this.getData
+    window.assetsReq = this.getData
     window.closeModal = this.handleOk
     this.getData()
   }
-  getData=()=>{
+  getData=() => {
     const queryObj = {
       page: 1,
       platformId: sessionStorage.getItem('platformId')
@@ -26,37 +26,36 @@ class HomeView extends React.Component {
       .then(res => {
         // console.log(res.data)
         // dataSource = res.data
-        const {data = []}=res
+        const { data = [] } = res
         this.setState({
-          renderList:data.map((v,i)=>{
+          renderList:data.map((v, i) => {
             v.key = i
             return v
           })
         })
       })
-
   }
   showModal = () => {
     this.setState({
       visible: true,
-    });
+    })
   }
 
   handleOk = (e) => {
-    console.log(e);
+    console.log(e)
     this.setState({
       visible: false,
-    });
+    })
   }
 
   handleCancel = (e) => {
-    console.log(e);
+    console.log(e)
     this.setState({
       visible: false,
-    });
+    })
   }
   render =() => {
-    const {renderList=[]}=this.state
+    const { renderList = [] } = this.state
     const columns = [{
       title: '平台名称',
       dataIndex: 'platformId',
@@ -82,8 +81,8 @@ class HomeView extends React.Component {
 
     }, {
       title: '操作',
-      render: (text,record)=>{
-        return <a onClick={()=>{
+      render: (text, record) => {
+        return <a onClick={() => {
           this.showModal()
           console.log(record)
         }}>修改</a>
@@ -91,20 +90,20 @@ class HomeView extends React.Component {
     }]
     return (
       <React.Fragment>
-        <Button type='primary' style={{marginBottom: '10px', alignItems: 'right'}}>增加新平台</Button>
+        <Button type='primary' style={{ marginBottom: '10px', alignItems: 'right' }}>增加新平台</Button>
         <Table dataSource={renderList} columns={columns} />
         <div>
-          {/*<Button type="primary" onClick={this.showModal}>*/}
-            {/*Open Modal*/}
-          {/*</Button>*/}
+          {/* <Button type="primary" onClick={this.showModal}> */}
+          {/* Open Modal */}
+          {/* </Button> */}
           <Modal
-            title="修改账户资产"
+            title='修改账户资产'
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
             footer={[]}
           >
-            <UpdateForm></UpdateForm>
+            <UpdateForm />
           </Modal>
         </div>
       </React.Fragment>

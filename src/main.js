@@ -25,9 +25,9 @@ let render = () => {
 // ------------------------------------
 if (__DEV__) {
   if (module.hot) {
-    const renderApp = render;
+    const renderApp = render
     const renderError = (error) => {
-      const RedBox = require('redbox-react').default;
+      const RedBox = require('redbox-react').default
 
       ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
     }
@@ -47,7 +47,7 @@ if (__DEV__) {
       './routes/index',
     ], () =>
         setImmediate(() => {
-          ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+          ReactDOM.unmountComponentAtNode(MOUNT_NODE)
           render()
         })
     )

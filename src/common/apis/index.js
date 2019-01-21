@@ -56,11 +56,11 @@ const xhr = url => {
       // TODO
       data.headers = response.headers
 
-      const {status} = data
+      const { status } = data
       const msg = data.message
       if (+status === 401) {
         history.push('/login')
-      } else if (+status !== 1){
+      } else if (+status !== 1) {
         message.error(msg)
       }
       return data

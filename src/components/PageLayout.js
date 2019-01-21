@@ -30,7 +30,7 @@ class Auth extends React.Component {
   render () {
     const platformId = sessionStorage.getItem('platformId')
     console.log(platformId)
-    if (platformId === null){
+    if (platformId === null) {
       history.push('/login')
     }
     return (
@@ -46,9 +46,9 @@ class Auth extends React.Component {
               key='sub1'
               title={<span><Icon type='user' /><span>系统管理</span></span>}
             >
-              {/*<Menu.Item key='1' onClick={() => history.push('/platform')}>平台管理</Menu.Item>*/}
-              {/*<Menu.Item key='2' onClick={() => history.push('/operator')}>操作员管理</Menu.Item>*/}
-              {/*<Menu.Item key='3' onClick={() => history.push('/role')}>角色管理</Menu.Item>*/}
+              {/* <Menu.Item key='1' onClick={() => history.push('/platform')}>平台管理</Menu.Item> */}
+              {/* <Menu.Item key='2' onClick={() => history.push('/operator')}>操作员管理</Menu.Item> */}
+              {/* <Menu.Item key='3' onClick={() => history.push('/role')}>角色管理</Menu.Item> */}
               <Menu.Item key='4' onClick={() => history.push('/contact')}>客户联系</Menu.Item>
               <Menu.Item key='5' onClick={() => history.push('/verify')}>认证统计</Menu.Item>
               <Menu.Item key='6' onClick={() => history.push('/report')}>举报查询</Menu.Item>
