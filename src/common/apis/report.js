@@ -6,7 +6,7 @@ const reportCreate = (ajaxinstance) => {
   }
 
   report.platformList = (postData) => {
-    return ajaxinstance.post('/platform/list/all', postData)
+    return ajaxinstance.post('/platform/list/func', postData)
   }
   return report
 }
