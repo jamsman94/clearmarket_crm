@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history } from 'fun'
 import Api from 'api'
-import { Card, Breadcrumb} from 'antd';
+import { Card, Breadcrumb } from 'antd'
 
 class HomeView extends React.Component {
   static propTypes = {}
-  componentDidMount () {{
-    console.log(this.props)
-  }}
+  componentDidMount () {
+    {
+      console.log(this.props)
+    }
+  }
   render =() => {
     return (
       <React.Fragment>
@@ -21,8 +23,7 @@ class HomeView extends React.Component {
         <Card
           hoverable
           style={{ minHeight:400 }}
-        >
-        </Card>
+         />
       </React.Fragment>
     )
   }

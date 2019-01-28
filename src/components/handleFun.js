@@ -6,14 +6,12 @@ export const changeStyle = (val) => {
   dom.style.display = val || 'none'
 }
 
-export const formatDate = (needTime) =>
-{
-  if (needTime !== null){
+export const formatDate = (needTime) => {
+  if (needTime !== null) {
     const time = new Date(needTime)
-    const ret = time.getFullYear() + '/' + (time.getMonth()+1) + '/' + time.getDate()
+    const ret = time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate()
     return ret
   } else {
     return '---'
   }
-
 }

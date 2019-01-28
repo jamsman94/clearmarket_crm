@@ -42,7 +42,7 @@ class HomeView extends React.Component {
       name: '胡彦祖',
       age: 42,
       address: '西湖区湖底公园1号'
-    }];
+    }]
 
     const columns = [{
       title: '姓名',
@@ -56,7 +56,7 @@ class HomeView extends React.Component {
       title: '住址',
       dataIndex: 'address',
       key: 'address',
-    }];
+    }]
     return (
       <React.Fragment>
         <Breadcrumb style={{ margin: '10px 0' }}>

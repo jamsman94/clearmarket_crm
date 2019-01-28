@@ -5,6 +5,9 @@ const reportCreate = (ajaxinstance) => {
     return ajaxinstance.post('/ureport/query', postData)
   }
 
+  report.platformList = (postData) => {
+    return ajaxinstance.post('/platform/list/func', postData)
+  }
   return report
 }
 

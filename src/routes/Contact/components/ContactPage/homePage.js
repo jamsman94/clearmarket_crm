@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history } from 'fun'
 import Api from 'api'
-import { Card, Breadcrumb} from 'antd';
+import { Card, Breadcrumb } from 'antd'
 import ContactTable from './ContactTable'
 
 class HomeView extends React.Component {

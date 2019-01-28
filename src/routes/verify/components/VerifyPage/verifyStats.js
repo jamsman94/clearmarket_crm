@@ -7,7 +7,7 @@ import { history, formatDate } from 'fun'
 import Api from 'api'
 import '../../style.scss'
 
-class HomeView extends  React.Component {
+class HomeView extends React.Component {
   state = {
     tabPosition: 'left',
     renderList:[]
@@ -24,13 +24,13 @@ class HomeView extends  React.Component {
       .then(res => {
         console.log(res)
         res.data
-        this.setState({renderList:res.data||[]})
+        this.setState({ renderList:res.data || [] })
       })
   }
   render=() => {
-    const  {renderList}=this.state
+    const { renderList } = this.state
     return (
-      <Card title="认证数据分析">
+      <Card title='认证数据分析'>
         <p
           style={{
             fontSize: 14,
@@ -38,27 +38,26 @@ class HomeView extends  React.Component {
             marginBottom: 16,
             fontWeight: 500,
           }}
-        >
-        </p>
+         />
         <div className={'stat-card'}>
           {
-            renderList.map((v,i)=>{
+            renderList.map((v, i) => {
               let num = null
 
               switch (i) {
                 case 0:
-                  num='每日认证人数'
-                      break
+                  num = '每日认证人数'
+                  break
                 case 1:
-                  num='每月认证人数'
+                  num = '每月认证人数'
                   break
                 case 2:
-                  num='每年认证人数'
+                  num = '每年认证人数'
                   break
                 case 3:
-                  num='总认证人数'
+                  num = '总认证人数'
                   break
-            }
+              }
               return (
                 <Card
                   key={i}

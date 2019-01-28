@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history } from 'fun'
 import Api from 'api'
-import { Card, Breadcrumb} from 'antd'
+import { Card, Breadcrumb } from 'antd'
 import ReportTable from './ReportTable'
 import DropDown from 'pages/Example/components/dropdown/dropDown'
 
