@@ -13,7 +13,7 @@ class HomeView extends React.Component {
   }
   componentDidMount () {
     // console.log(this.props)
-    window.assetsReq= this.getData
+    window.assetsReq = this.getData
     window.closeModal = this.handleOk
     this.getData()
   }
@@ -91,7 +91,6 @@ class HomeView extends React.Component {
     }]
     return (
       <React.Fragment>
-        <Button type='primary' style={{marginBottom: '10px', alignItems: 'right'}}>增加新平台</Button>
         <Table dataSource={renderList} columns={columns} />
         <div>
           {/*<Button type="primary" onClick={this.showModal}>*/}

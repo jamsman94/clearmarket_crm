@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-  Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
-} from 'antd';
+  Form, Input, Select, Button, AutoComplete,
+} from 'antd'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from '../../containers'
@@ -9,7 +9,7 @@ import { history, formatDate } from 'fun'
 import Api from 'api'
 
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
+const AutoCompleteOption = AutoComplete.Option
 
 class RegistrationForm extends React.Component {
   state = {
@@ -18,26 +18,27 @@ class RegistrationForm extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         const updateObj = {
-          assets: values.assets,
-          platformId: sessionStorage.getItem('platformId')
+          platformCnName: values.platformCnName,
+          platformEnName: values.platformEnName,
+          platformId: sessionStorage.getItem('updatePlatId'),
+          reName: values.rename
         }
-        Api.updateAssets(updateObj)
+        Api.savePlatInfo(updateObj)
           .then(res => {
             console.log(res)
-            window.closeModal()
-            window.assetsReq()
+            window.closeUpdate()
           })
       }
-    });
+    })
   }
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
+  render () {
+    const { getFieldDecorator } = this.props.form
+    const { autoCompleteResult } = this.state
 
     const formItemLayout = {
       labelCol: {
@@ -76,24 +77,49 @@ class RegistrationForm extends React.Component {
 
     return (
       <React.Fragment>
-        <div style={{width:'60%',margin:'10px auto'}}>
+        <div style={{ width:'60%', margin:'10px auto' }}>
           <Form onSubmit={this.handleSubmit}>
             <Form.Item
               {...formItemLayout}
-              label="现有资产"
+              label='平台中文名称'
             >
-              {getFieldDecorator('assets', {
+              {getFieldDecorator('platformCnName', {
                 rules: [{
                   required: true,
-                  min: 100,
-                  message: '请输入正确资产!',
+                  message: '请输入正确的平台名称!',
+                }],
+              })(
+                <Input />
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='平台英文名称'
+            >
+              {getFieldDecorator('platformEnName', {
+                rules: [{
+                  required: true,
+                  message: '请输入正确的平台名称!',
+                }],
+              })(
+                <Input />
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='平台简称'
+            >
+              {getFieldDecorator('rename', {
+                rules: [{
+                  required: true,
+                  message: '请输入正确的平台简称!',
                 }],
               })(
                 <Input />
               )}
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
-              <Button type='primary' style={{ width: '50%' }} htmlType='submit'>Register</Button>
+              <Button type='primary' style={{ width: '50%' }} htmlType='submit'>更新信息</Button>
             </Form.Item>
           </Form>
         </div>

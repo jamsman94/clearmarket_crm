@@ -43,22 +43,64 @@ class Auth extends React.Component {
           <div className='logo' />
           <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
             <SubMenu
-              key='sub1'
+              key='systemControl'
               title={<span><Icon type='user' /><span>系统管理</span></span>}
+              id='000001'
             >
-              {/*<Menu.Item key='1' onClick={() => history.push('/platform')}>平台管理</Menu.Item>*/}
-              {/*<Menu.Item key='2' onClick={() => history.push('/operator')}>操作员管理</Menu.Item>*/}
-              {/*<Menu.Item key='3' onClick={() => history.push('/role')}>角色管理</Menu.Item>*/}
-              <Menu.Item key='4' onClick={() => history.push('/contact')}>客户联系</Menu.Item>
-              <Menu.Item key='5' onClick={() => history.push('/verify')}>认证统计</Menu.Item>
-              <Menu.Item key='6' onClick={() => history.push('/report')}>举报查询</Menu.Item>
+              <SubMenu
+                key='platform'
+                id='100020'
+                title={<span>平台管理</span>}
+              >
+                <Menu.Item key='platform' id='100022' onClick={() => history.push('/platform')}>平台管理</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key='role'
+                id='100010'
+                title={<span>角色添加</span>}
+              >
+                <Menu.Item key='role' id='100012' onClick={() => history.push('/role')}>角色添加</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key='operator'
+                id='100000'
+                title={<span>操作员添加</span>}
+              >
+                <Menu.Item key='operator' id='100002' onClick={() => history.push('/operator')}>操作员添加</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key='contactus'
+                id='100030'
+                title={<span>联系我们管理</span>}
+              >
+                <Menu.Item key='contactus' id='100032' onClick={() => history.push('/contact')}>联系我们管理</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key='report'
+                id='100040'
+                title={<span>报表管理</span>}
+              >
+                <Menu.Item key='verify' id='100041' onClick={() => history.push('/verify')}>认证数量统计</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key='usrreport'
+                id='100020'
+                title={<span>举报管理</span>}
+              >
+                <Menu.Item key='usrreport' id='100022' onClick={() => history.push('/report')}>举报管理</Menu.Item>
+              </SubMenu>
             </SubMenu>
             <SubMenu
-              key='sub2'
+              key='platformControl'
               title={<span><Icon type='team' /><span>平台管理</span></span>}
             >
-              <Menu.Item key='21' onClick={() => history.push('/asset-report')}>平台资产认证</Menu.Item>
-              <Menu.Item key='22' onClick={() => history.push('/trade-history')}>交易历史</Menu.Item>
+              <SubMenu
+                key='assets'
+                id='200000'
+                title={<span>资产认证</span>}
+              >
+                <Menu.Item key='assets' id='200002' onClick={() => history.push('/asset-report')}>资产更新</Menu.Item>
+              </SubMenu>
             </SubMenu>
           </Menu>
         </Sider>

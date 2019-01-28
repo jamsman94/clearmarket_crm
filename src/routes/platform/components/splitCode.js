@@ -4,7 +4,7 @@ import Loading from 'components/Loading'
 // 功能首页
 export const HomePage = (
   Loadable({
-    loader: () => import('./ReportPage/homePage'),
+    loader: () => import('./platformPage/homePage'),
     loading: Loading
   })
 )

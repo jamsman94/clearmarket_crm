@@ -13,6 +13,7 @@ import czqk from './czqk'
 import contact from './contact'
 import verify from './verify'
 import report from './report'
+import platform from './platform'
 const baseURL = hostConfig.baseURL
 const reqArr = []
 // 实例化 ajax请求对象
@@ -95,7 +96,8 @@ const API = {
   ...czqk(xhr),
   ...contact(xhr()),
   ...verify(xhr()),
-  ...report(xhr())
+  ...report(xhr()),
+  ...platform(xhr())
 }
 window.ar = xhr()
 export default API

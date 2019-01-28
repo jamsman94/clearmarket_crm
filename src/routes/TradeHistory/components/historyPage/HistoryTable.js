@@ -12,9 +12,7 @@ class HomeView extends React.Component {
   }
   componentDidMount () {
     // console.log(this.props)
-    window.assetsReq= this.getData
-    window.closeModal = this.handleOk
-    this.getData()
+    window.assetsReq()
   }
   render =() => {
     const {renderList=[]}=this.state
