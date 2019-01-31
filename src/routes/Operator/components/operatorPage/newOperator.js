@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Form, Input, Select, Button, AutoComplete, Dropdown, Menu, Icon, message
+  Form, Input, Select, Button, AutoComplete,
 } from 'antd'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -15,32 +15,42 @@ class RegistrationForm extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
-  };
+    roleList: [],
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
+      console.log(values)
       if (!err) {
-        console.log(values)
         const updateObj = {
-          platformCnName: values.platformCnName,
-          platformEnName: values.platformEnName,
-          platformId: sessionStorage.getItem('updatePlatId'),
-          reName: values.rename
+          oprDsc: values.oprDsc,
+          oprId: values.oprId,
+          oprPwd: values.oprPwd,
+          platformId: values.platformId,
+          roleId: values.roleId
         }
         Api.newOperator(updateObj)
           .then(res => {
-            console.log(res)
-            window.closeUpdate()
+            window.queryOperator()
+            window.closeNewOperator()
           })
       }
     })
   }
+  handlePlatChoose = (val) => {
+    Api.updateRoleList(val)
+      .then(res => {
+        this.setState({
+          roleList: res.data
+        })
+      })
+  }
 
   render () {
     const { getFieldDecorator } = this.props.form
-    const { autoCompleteResult } = this.state
-    const Option = Select.Option
+    const { platList } = this.props
+    const { autoCompleteResult , roleList = []} = this.state
 
     const formItemLayout = {
       labelCol: {
@@ -65,27 +75,31 @@ class RegistrationForm extends React.Component {
       },
     }
 
-    function handleChange(value) {
-      console.log(`selected ${value}`);
-    }
-
-    function handleMenuClick(e) {
-      message.info('Click on menu item.');
-      console.log('click', e);
-    }
-
     return (
       <React.Fragment>
         <div style={{ width:'60%', margin:'10px auto' }}>
           <Form onSubmit={this.handleSubmit}>
             <Form.Item
               {...formItemLayout}
-              label='角色名称'
+              label='用户名'
             >
-              {getFieldDecorator('roleName', {
+              {getFieldDecorator('oprId', {
                 rules: [{
                   required: true,
-                  message: '请输入正确的角色名称!',
+                  message: '请输入合适的用户名!',
+                }],
+              })(
+                <Input />
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='密码'
+            >
+              {getFieldDecorator('oprPwd', {
+                rules: [{
+                  required: true,
+                  message: '请输入合适的密码!',
                 }],
               })(
                 <Input />
@@ -98,46 +112,51 @@ class RegistrationForm extends React.Component {
               {getFieldDecorator('platformId', {
                 rules: [{
                   required: true,
-                  length: 4,
-                  message: '请输入正确的平台ID!',
+                  message: '请输入平台ID!',
                 }],
               })(
-                <Input />
-              )}
-            </Form.Item>
-            <Form.Item
-              {...formItemLayout}
-              label='角色分类'
-            >
-              {getFieldDecorator('roleType', {
-                rules: [{
-                  required: true,
-                  message: '请输入正确的平台简介!',
-                }],
-              })(
-                <Select style={{ width: 200 }}>
-                  <Option value='1'>ClearMarkets管理员</Option>
-                 <Option value='2'>ClearMarkets操作员</Option>
-                  <Option value='3'>平台管理员</Option>
-                  <Option value='4'>平台操作员</Option>
+                <Select style={{ width: 200 }} onChange={this.handlePlatChoose}>
+                  {
+                    platList.map(val => <Option value={val.platformId} key={val.platformId}>{val.platformId + '-' +
+                      val.rename}</Option>
+                    )
+                  }
                 </Select>
               )}
             </Form.Item>
             <Form.Item
               {...formItemLayout}
-              label='平台简介'
+              label='角色选择'
             >
-              {getFieldDecorator('descr', {
+              {getFieldDecorator('roleId', {
                 rules: [{
                   required: true,
-                  message: '请输入正确的平台简介!',
+                  message: '请输入正确的平台简称!',
+                }],
+              })(
+                <Select style={{ width: 200 }}>
+                  {
+                    roleList.map(val => <Option value={val.roleId} key={val.roleId}>{val.roleName}</Option>
+                    )
+                  }
+                </Select>
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='管理员简介'
+            >
+              {getFieldDecorator('oprDsc', {
+                rules: [{
+                  required: true,
+                  message: '请输入管理员简介!',
                 }],
               })(
                 <Input />
               )}
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
-              <Button type='primary' style={{ width: '50%' }} htmlType='submit'>增加角色</Button>
+              <Button type='primary' style={{ width: '50%' }} htmlType='submit'>更新信息</Button>
             </Form.Item>
           </Form>
         </div>

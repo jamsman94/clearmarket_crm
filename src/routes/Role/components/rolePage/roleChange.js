@@ -8,7 +8,7 @@ import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history, formatDate } from 'fun'
 import Api from 'api'
 
-const { Option } = Select;
+const { Option } = Select
 const AutoCompleteOption = AutoComplete.Option
 
 class RegistrationForm extends React.Component {
@@ -22,15 +22,17 @@ class RegistrationForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         const updateObj = {
-          platformCnName: values.platformCnName,
-          platformEnName: values.platformEnName,
-          platformId: sessionStorage.getItem('updatePlatId'),
-          reName: values.rename
+          descr: values.descr,
+          roleList: '100000',
+          platformId: parseInt(values.platformId),
+          roleName: values.roleName,
+          roleType: parseInt(values.roleType)
         }
-        Api.savePlatInfo(updateObj)
+        Api.updateRoleInfo(sessionStorage.getItem('updateRoleId'), updateObj)
           .then(res => {
             console.log(res)
-            window.closeUpdate()
+            window.queryRole()
+            window.closeNewRole()
           })
       }
     })
@@ -81,12 +83,34 @@ class RegistrationForm extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Item
               {...formItemLayout}
-              label='平台中文名称'
+              label='角色ID'
             >
-              {getFieldDecorator('platformCnName', {
+              {getFieldDecorator('roleId', {
+                initialValue: sessionStorage.getItem('updateRoleId'),
                 rules: [{
                   required: true,
-                  message: '请输入正确的平台名称!',
+                  message: '请输入正确的角色ID!',
+                }],
+              })(
+                <Input
+                  disabled={true}
+                />
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='角色名称'
+            >
+              {getFieldDecorator('roleName', {
+                rules: [{
+                  required: true,
+                  message: '请输入正确的角色名称!',
+                }, {
+                  max: 32,
+                  message: '最多32个字符'
+                }, {
+                  min: 2,
+                  message: '最少2个字符'
                 }],
               })(
                 <Input />
@@ -94,25 +118,47 @@ class RegistrationForm extends React.Component {
             </Form.Item>
             <Form.Item
               {...formItemLayout}
-              label='平台英文名称'
+              label='平台ID'
             >
-              {getFieldDecorator('platformEnName', {
+              {getFieldDecorator('platformId', {
+                initialValue: sessionStorage.getItem('updatePlatId'),
                 rules: [{
                   required: true,
-                  message: '请输入正确的平台名称!',
+                  length: 4,
+                  message: '请输入正确的平台ID!',
                 }],
               })(
-                <Input />
+                <Input
+                  disabled={true}
+                />
               )}
             </Form.Item>
             <Form.Item
               {...formItemLayout}
-              label='平台简称'
+              label='角色分类'
             >
-              {getFieldDecorator('rename', {
+              {getFieldDecorator('roleType', {
                 rules: [{
                   required: true,
-                  message: '请输入正确的平台简称!',
+                  message: '请输入正确的平台简介!',
+                }],
+              })(
+                <Select style={{ width: 200 }}>
+                  <Option value='1'>ClearMarkets管理员</Option>
+                  <Option value='2'>ClearMarkets操作员</Option>
+                  <Option value='3'>平台管理员</Option>
+                  <Option value='4'>平台操作员</Option>
+                </Select>
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='角色简介'
+            >
+              {getFieldDecorator('descr', {
+                rules: [{
+                  required: true,
+                  message: '请输入正确的角色简介!',
                 }],
               })(
                 <Input />

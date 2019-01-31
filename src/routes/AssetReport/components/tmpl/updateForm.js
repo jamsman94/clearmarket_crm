@@ -23,7 +23,7 @@ class RegistrationForm extends React.Component {
       if (!err) {
         const updateObj = {
           assets: values.assets,
-          platformId: sessionStorage.getItem('platformId')
+          platformId: sessionStorage.getItem('updatePlatId')
         }
         Api.updateAssets(updateObj)
           .then(res => {
@@ -85,7 +85,6 @@ class RegistrationForm extends React.Component {
               {getFieldDecorator('assets', {
                 rules: [{
                   required: true,
-                  min: 100,
                   message: '请输入正确资产!',
                 }],
               })(

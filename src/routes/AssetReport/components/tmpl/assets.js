@@ -85,7 +85,7 @@ class HomeView extends React.Component {
       render: (text,record)=>{
         return <a onClick={()=>{
           this.showModal()
-          console.log(record)
+          sessionStorage.setItem('updatePlatId', record.platformId)
         }}>修改</a>
       }
     }]

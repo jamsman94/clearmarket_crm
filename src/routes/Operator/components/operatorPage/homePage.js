@@ -5,7 +5,7 @@ import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history } from 'fun'
 import Api from 'api'
 import { Card, Breadcrumb} from 'antd'
-import AddPlatform from './addPlatform'
+import AddOperator from './addOperator'
 
 class HomeView extends React.Component {
   static propTypes = {}
@@ -21,7 +21,7 @@ class HomeView extends React.Component {
           hoverable
           style={{ minHeight:400 }}
         >
-          <AddPlatform />
+          <AddOperator />
         </Card>
       </React.Fragment>
     )

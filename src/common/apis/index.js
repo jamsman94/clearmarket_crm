@@ -14,6 +14,8 @@ import contact from './contact'
 import verify from './verify'
 import report from './report'
 import platform from './platform'
+import role from './role'
+import operator from './operator'
 const baseURL = hostConfig.baseURL
 const reqArr = []
 // 实例化 ajax请求对象
@@ -97,7 +99,9 @@ const API = {
   ...contact(xhr()),
   ...verify(xhr()),
   ...report(xhr()),
-  ...platform(xhr())
+  ...platform(xhr()),
+  ...role(xhr()),
+  ...operator(xhr())
 }
 window.ar = xhr()
 export default API

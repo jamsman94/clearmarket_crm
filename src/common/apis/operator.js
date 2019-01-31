@@ -17,8 +17,8 @@ const operatorCreate = (ajaxinstance) => {
     return ajaxinstance.put('/operator/upd', postData)
   }
 
-  operator.deleteOperator = (postData) => {
-    return ajaxinstance.delete(`/operator/del/${postData.platformId}/${postData.oprId}`)
+  operator.deleteOperator = (platformId, oprId) => {
+    return ajaxinstance.delete(`/operator/del/${platformId}/${oprId}`)
   }
   return operator
 }

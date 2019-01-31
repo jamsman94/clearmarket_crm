@@ -66,7 +66,7 @@ class Auth extends React.Component {
                 id='100000'
                 title={<span>操作员添加</span>}
               >
-                <Menu.Item key='operator' id='100002' onClick={() => history.push('/operator')}>操作员添加</Menu.Item>
+                <Menu.Item key='operator' id='100002' onClick={() => history.push('/operator')}>操作员管理</Menu.Item>
               </SubMenu>
               <SubMenu
                 key='contactus'

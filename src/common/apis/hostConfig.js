@@ -1,19 +1,16 @@
 const { location } = window
 const hostname = location.hostname.replace(/\..*/, '')
 const apiObj = {
-  'prod': 'https://api-v2.tophold.com/api/v2/',
+  'prod': 'http://192.168.0.65:10355/',
   'test': 'http://139.196.173.182:10355/'
 }
 const crmUrl = 'http://139.196.173.182:10255/'
+
 let [baseURL, wsMarket, wsTrade, tradeApi, marketApi, kLineApi] = ['']
 switch (hostname) {
+  // TODO: change trade-h5 to prod host
   case 'trade-h5':
-    baseURL = apiObj[hostname]
-
-    break
-  case 'trade-h5-test':
-    baseURL = apiObj[hostname]
-
+    baseURL = apiObj['prod']
     break
   default:
     baseURL = apiObj['test']

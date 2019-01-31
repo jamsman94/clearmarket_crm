@@ -33,7 +33,6 @@ class HomeView extends React.Component {
     }
     Api.queryPlatInfo(queryObj)
       .then(res => {
-        console.log(res.data)
         const {data = []} = res
         this.setState({
           renderList: data.map((v, i) => {
@@ -49,14 +48,18 @@ class HomeView extends React.Component {
     });
   }
 
-  showDelete = () => {
+  showDelete = (platId) => {
     confirm({
       title: '删除平台',
       content: '平台的所有数据将会被删除，请确认',
       onOk() {
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'));
+        Api.deletePlatEntry(platId)
+          .then(res => {
+            window.queryPlat()
+            return new Promise((resolve, reject) => {
+              setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+            }).catch(() => console.log('Oops errors!'));
+          })
       },
       onCancel() {},
     });
@@ -105,7 +108,7 @@ class HomeView extends React.Component {
             sessionStorage.setItem('updateRename', text.reName)
           }}>修改信息</Button>
           <Button type='danger' onClick={() => {
-            this.showDelete()
+            this.showDelete(text.platformId)
           }}>删除平台</Button>
         </div>)
       }

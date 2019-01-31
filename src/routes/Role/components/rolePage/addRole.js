@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { formatDate } from 'fun'
 import Api from 'api'
-import UpdatePlatform from './updatePlatform'
-import NewOperator from './newOperator'
+import RoleChange from './roleChange'
+import NewRole from './newRole'
 
 const confirm = Modal.confirm;
 
@@ -15,8 +15,8 @@ class HomeView extends React.Component {
     renderList: []
   }
   componentDidMount () {
-    window.queryPlat = this.queryData
-    window.closeUpdate = this.handleCancel
+    window.queryRole = this.queryData
+    window.closeNewRole = this.handleCancelNewRole
     this.queryData()
   }
   queryData =(platformName) => {
@@ -31,7 +31,7 @@ class HomeView extends React.Component {
         page: 1
       }
     }
-    Api.queryPlatInfo(queryObj)
+    Api.queryRoleList(queryObj)
       .then(res => {
         console.log(res.data)
         const {data = []} = res
@@ -53,6 +53,32 @@ class HomeView extends React.Component {
       visibleNewRole: false
     })
   }
+  showRoleChange = () => {
+    this.setState({
+      visibleRoleChange: true
+    })
+  }
+  handleRoleChangeCancel = () => {
+    this.setState({
+      visibleRoleChange: false
+    })
+  }
+  showDelete = (platId, roleId) => {
+    confirm({
+      title: '删除角色',
+      content: '角色信息将被删除，请确认！',
+      onOk() {
+        Api.deleteRole(platId, roleId)
+          .then(res => {
+            window.queryRole()
+            return new Promise((resolve, reject) => {
+              setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+            }).catch(() => console.log('Oops errors!'));
+          })
+      },
+      onCancel() {},
+    });
+  }
   render =() => {
     const { renderList = [] } = this.state
     const columns = [{
@@ -60,25 +86,30 @@ class HomeView extends React.Component {
       dataIndex: 'platformId',
       key: 'platformId'
     }, {
-      title: '平台中文名称',
-      dataIndex: 'platformCnName',
-      key: 'platformCnName'
+      title: '角色分类',
+      dataIndex: 'roleType',
+      key: 'roleType'
     }, {
-      title: '平台英文名称',
-      dataIndex: 'platformEnName',
-      key: 'platformEnName'
+      title: '角色名称',
+      dataIndex: 'roleName',
+      key: 'roleName'
     }, {
-      title: '平台操作',
+      title: '角色描述',
+      dataIndex: 'dsc',
+      key: 'dsc'
+    }, {
+      title: '角色操作',
       render: (text) => {
+        console.log(text)
         return (<div>
           <Button type='primary' style={{ marginRight: '10px' }} onClick={() => {
-            this.showModal()
+            this.showRoleChange()
             sessionStorage.setItem('updatePlatId', text.platformId)
-            sessionStorage.setItem('updateRename', text.reName)
-          }}>修改信息</Button>
+            sessionStorage.setItem('updateRoleId', text.roleId)
+          }}>修改角色</Button>
           <Button type='danger' onClick={() => {
-            this.showDelete()
-          }}>删除平台</Button>
+            this.showDelete(text.platformId, text.roleId)
+          }}>删除角色</Button>
         </div>)
       }
     }]
@@ -90,22 +121,20 @@ class HomeView extends React.Component {
         <Table dataSource={renderList} columns={columns} />
         <div>
           <Modal
-            title='修改平台信息'
-            visible={this.state.visibleUpdate}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
+            title='修改角色'
+            visible={this.state.visibleRoleChange}
+            onCancel={this.handleRoleChangeCancel}
             footer={[]}
           >
-            <UpdatePlatform />
+            <RoleChange />
           </Modal>
           <Modal
             title='增加角色'
             visible={this.state.visibleNewRole}
-            onOk={this.handleNew}
             onCancel={this.handleCancelNewRole}
             footer={[]}
           >
-            <NewOperator />
+            <NewRole />
           </Modal>
         </div>
       </React.Fragment>
