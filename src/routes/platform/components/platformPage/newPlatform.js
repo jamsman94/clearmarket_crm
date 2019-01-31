@@ -29,8 +29,8 @@ class RegistrationForm extends React.Component {
         }
         Api.savePlatInfo(updateObj)
           .then(res => {
-            console.log(res)
-            window.closeUpdate()
+            window.queryPlat()
+            window.closeNewPlat()
           })
       }
     })

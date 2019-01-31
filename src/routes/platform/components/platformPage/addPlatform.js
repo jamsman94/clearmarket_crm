@@ -17,6 +17,7 @@ class HomeView extends React.Component {
   componentDidMount () {
     window.queryPlat = this.queryData
     window.closeUpdate = this.handleCancel
+    window.closeNewPlat = this.handleCancelNew
     this.queryData()
   }
   queryData =(platformName) => {
