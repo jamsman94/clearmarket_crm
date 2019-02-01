@@ -5,6 +5,7 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import './component'
 import { history } from 'components/handleFun'
 import Api from 'api'
+import * as sha256 from "sha256";
 const FormItem = Form.Item
 class Login extends React.Component {
   static propTypes={
@@ -15,10 +16,12 @@ class Login extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const obj = {
-          oprId:'admin',
-          oprPwd:111111,
-          platformId: '1000'
+          oprId:values.oprId,
+          oprPwd: sha256(values.oprPwd),
+          platformId: values.platformId
         }
+        // console.log(sha256(111111))
+        // console.log(sha256('111111'))
         // Promise.resolve()
         // .then(() => console.log(obj))
         // .then(() => Api.getLoginInfo(obj))
