@@ -87,6 +87,12 @@ class RegistrationForm extends React.Component {
                 rules: [{
                   required: true,
                   message: '请输入正确的平台名称!',
+                }, {
+                  min: 4,
+                  message: '名字最少需要4位'
+                }, {
+                  max: 32,
+                  message: '名字不可超过32位'
                 }],
               })(
                 <Input />
@@ -100,6 +106,12 @@ class RegistrationForm extends React.Component {
                 rules: [{
                   required: true,
                   message: '请输入正确的平台名称!',
+                }, {
+                  min: 4,
+                  message: '名字最少需要4位'
+                }, {
+                  max: 32,
+                  message: '名字不可超过32位'
                 }],
               })(
                 <Input />
@@ -113,6 +125,9 @@ class RegistrationForm extends React.Component {
                 rules: [{
                   required: true,
                   message: '请输入正确的平台简称!',
+                }, {
+                  len: 2,
+                  message: '平台简称只能是2位'
                 }],
               })(
                 <Input />
