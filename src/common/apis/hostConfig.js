@@ -7,6 +7,8 @@ const apiObj = {
 const crmUrl = 'http://139.196.173.182:10255/'
 
 let [baseURL, wsMarket, wsTrade, tradeApi, marketApi, kLineApi] = ['']
+
+console.log(hostname)
 switch (hostname) {
   // TODO: change trade-h5 to prod host
   case 'cm-crm':
