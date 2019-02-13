@@ -2,7 +2,7 @@ const { location } = window
 const hostname = location.hostname.replace(/\..*/, '')
 const apiObj = {
   'prod': 'https://cm-crm-api.tophold.com/',
-  'test': 'http://192.168.1.44:8080/'
+  'test': 'http://139.196.173.182:10355/'
 }
 const crmUrl = 'http://139.196.173.182:10255/'
 
