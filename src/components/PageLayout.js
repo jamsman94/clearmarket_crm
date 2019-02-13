@@ -19,7 +19,8 @@ class Auth extends React.Component {
     // !Cookies.get('token') && (history.push('/login'))
   }
   logout=() => {
-
+    sessionStorage.clear()
+    history.push('/login')
   }
   skip=(val) => {
     history.push(`/${val}`)
@@ -105,7 +106,9 @@ class Auth extends React.Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          <Header style={{ background: '#fff', padding: 0 }} >
+            123
+          </Header>
           <Content style={{ margin: '0 16px' }}>
             <div style={{ padding: 10, minHeight: 360 }}>
               {this.props.children}

@@ -31,6 +31,7 @@ class RegistrationForm extends React.Component {
           platformId: values.platformId,
           roleId: values.roleId
         }
+        console.log(updateObj)
         Api.newOperator(updateObj)
           .then(res => {
             window.queryOperator()

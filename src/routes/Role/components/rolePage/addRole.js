@@ -21,16 +21,18 @@ class HomeView extends React.Component {
   }
   queryData =(platformName) => {
     let queryObj = null
-    if (platformName !== null) {
+    if (platformName !== undefined) {
       queryObj = {
         page: 1,
-        name: platformName
+        platformId: platformName
       }
     } else {
       queryObj = {
-        page: 1
+        page: 1,
+        platformId: sessionStorage.getItem('platformId')
       }
     }
+    console.log(queryObj)
     Api.queryRoleList(queryObj)
       .then(res => {
         console.log(res.data)

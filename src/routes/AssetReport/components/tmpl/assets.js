@@ -59,17 +59,8 @@ class HomeView extends React.Component {
     const {renderList=[]}=this.state
     const columns = [{
       title: '平台名称',
-      dataIndex: 'platformId',
-      key: 'platformId',
-      render: (data) => {
-        if (data === 1001) {
-          return 'Tophold'
-        } else if (data === 1000) {
-          return 'ClearMarkets'
-        } else {
-          return 'Unregistered Platforms'
-        }
-      }
+      dataIndex: 'platformName',
+      key: 'platformName'
     }, {
       title: '资产数量',
       dataIndex: 'assets',
