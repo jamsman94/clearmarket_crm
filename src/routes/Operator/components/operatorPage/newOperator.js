@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from '../../containers'
 import { history, formatDate } from 'fun'
 import Api from 'api'
+import * as sha256 from "sha256";
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option
@@ -26,7 +27,7 @@ class RegistrationForm extends React.Component {
         const updateObj = {
           oprDsc: values.oprDsc,
           oprId: values.oprId,
-          oprPwd: values.oprPwd,
+          oprPwd: sha256(values.oprPwd),
           platformId: values.platformId,
           roleId: values.roleId
         }
