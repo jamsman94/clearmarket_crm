@@ -1,0 +1,131 @@
+<div class="CM-default__content-title">
+  <h1>
+    操作员管理
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<button nz-button nzType="primary" (click)=handleNew(CreateFormTemplate)>增加新权限组</button>
+<nz-table
+  [nzData]=renderList
+  [nzFrontPagination]=false
+  [nzLoading]=loading
+  [nzTotal]=total
+  (nzPageIndexChange)="queryUserByPage($event)">
+  <thead>
+  <tr>
+    <th>操作员账号</th>
+    <th>平台ID</th>
+    <th>权限组名字</th>
+    <th>操作员描述</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of renderList">
+    <td>{{data.oprId}}</td>
+    <td>{{data.platformId}}</td>
+    <td>{{data.roleName}}</td>
+    <td>{{data.oprDsc}}</td>
+    <td>
+      <button nz-button nzType="primary" (click)="handleEdit(editFormTemplate, data.oprId, data.platformId)">操作员修改</button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button nz-button nzType="primary" (click)="lol(data.platformId, data.roleId, editFormTemplate)">密码修改</button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button nz-button nzType="danger" (click)="handleDelete(data.platformId, data.roleId)">删除平台</button>
+      <nz-divider nzType="vertical"></nz-divider>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<ng-template #CreateFormTemplate>
+  <form nz-form [formGroup]="createForm" class="login-form">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          用户名：
+          <input type="text" nz-input formControlName="oprId" placeholder="用户名">
+        </nz-input-group>
+        <nz-form-explain *ngIf="createForm.get('oprId').dirty && createForm.get('oprId').errors">请输入用户名</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          密码：
+          <input type="text" nz-input formControlName="oprPwd" placeholder="密码">
+        </nz-input-group>
+        <nz-form-explain *ngIf="createForm.get('oprPwd').dirty && createForm.get('oprPwd').errors">请输入密码</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        平台名称：
+        <nz-select formControlName="platformId" nzPlaceHolder="请选择平台" required="true" (ngModelChange)="queryRoleList(createForm.value.platformId)">
+          <nz-option *ngFor="let plat of platformList"
+                     nzValue="{{plat.platformId}}"
+                     nzLabel="{{plat.rename}}"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        权限组：
+        <nz-select formControlName="roleId" nzPlaceHolder="请选择权限组" required="true" (ngModelChange)="queryRoleList()">
+          <nz-option *ngFor="let role of roleList"
+                     nzValue="{{role.roleId}}"
+                     nzLabel="{{role.roleName}}"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          操作员简介：
+          <input type="text" nz-input formControlName="oprDsc" placeholder="操作员简介">
+        </nz-input-group>
+        <nz-form-explain *ngIf="createForm.get('oprDsc').dirty && createForm.get('oprDsc').errors">操作员简介不能为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<ng-template #editFormTemplate>
+  <form nz-form [formGroup]="editForm" class="login-form">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          操作员账号：
+          <input type="text" nz-input formControlName="oprId" placeholder="权限组名称" value="{{editOprId}}" readonly>
+        </nz-input-group>
+        <nz-form-explain *ngIf="editForm.get('oprId').dirty && editForm.get('oprId').errors">请输入操作员账号</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          平台ID：
+          <input type="text" nz-input formControlName="platformId" value="{{editPlatId}}" readonly>
+        </nz-input-group>
+        <nz-form-explain *ngIf="editForm.get('platformId').dirty && editForm.get('platformId').errors">请输入平台ID</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        权限选择
+        <nz-select formControlName="roleId" nzPlaceHolder="请选择权限归类">
+          <nz-option *ngFor="let role of roleList"
+                     nzValue="{{role.roleId}}"
+                     nzLabel="{{role.roleName}}"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          管理员简介：
+          <input type="text" nz-input formControlName="oprDsc" placeholder="权限组简介">
+        </nz-input-group>
+        <nz-form-explain *ngIf="editForm.get('oprDsc').dirty && editForm.get('oprDsc').errors">权限组简介不能为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>

@@ -1,0 +1,54 @@
+<div class="CM-default__content-title">
+  <h1>
+    联系我们管理
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<nz-table
+  [nzData]=renderList
+  [nzFrontPagination]=false
+  [nzLoading]=loading
+  [nzTotal]=total
+  (nzPageIndexChange)="queryContactInfo($event)">
+  <thead>
+  <tr>
+    <th>公司名称</th>
+    <th>Email</th>
+    <th>公司网址</th>
+    <th>联系人姓名</th>
+    <th>联系信息</th>
+    <th>联系时间</th>
+    <th>跟进内容</th>
+    <th>处理时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of renderList">
+    <td>{{data.company}}</td>
+    <td>{{data.email}}</td>
+    <td>{{data.link}}</td>
+    <td>{{data.name}}</td>
+    <td>{{data.msg}}</td>
+    <td>{{data.createTime | date }}</td>
+    <td>{{data.renderedFlag}}</td>
+    <td>{{data.updateTime | date }}</td>
+    <td>
+      <button nz-button nzType="primary" (click)="updateContactConfirm(editContact, data)">操作</button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<ng-template #editContact>
+  <form nz-form [formGroup]="editForm" class="login-form">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          操作信息：
+          <input type="text" nz-input formControlName="editMessage" placeholder="操作信息">
+        </nz-input-group>
+        <nz-form-explain *ngIf="editForm.get('editMessage').dirty && editForm.get('editMessage').errors">请输入操作信息</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>

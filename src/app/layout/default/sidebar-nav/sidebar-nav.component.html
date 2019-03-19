@@ -1,0 +1,69 @@
+<div style="width: 200px;">
+  <ul nz-menu [nzMode]="'inline'">
+    <li nz-menu-item routerLink="/dashboard">
+      <span title>
+        <i nz-icon type="dashboard"></i>
+        <span>仪表盘</span>
+      </span>
+    </li>
+    <li nz-menu-item *ngIf="platform === 1000" routerLink="/contact">
+      <span title>
+        <i nz-icon type="mail"></i>
+        <span>联系我们管理</span>
+      </span>
+    </li>
+    <li nz-menu-item routerLink="/role">
+      <span title>
+        <i nz-icon type="lock"></i>
+        <span>权限管理</span>
+      </span>
+    </li>
+    <li nz-menu-item routerLink="/user">
+      <span title>
+        <i nz-icon type="user"></i>
+        <span>用户管理</span>
+      </span>
+    </li>
+    <li nz-menu-item routerLink="/platform">
+      <span title>
+        <i nz-icon type="team"></i>
+        <span>平台管理</span>
+      </span>
+    </li>
+    <li nz-submenu>
+          <span title>
+            <i nz-icon type="deployment-unit"></i>
+            <span>信息管理</span>
+          </span>
+      <ul>
+        <li nz-menu-item routerLink="/ratings">评级管理</li>
+        <li nz-menu-item>资金监管</li>
+        <li nz-menu-item>风险管理</li>
+        <li nz-menu-item routerLink="/verification">认证管理</li>
+        <li nz-menu-item>举报管理</li>
+      </ul>
+    </li>
+    <li nz-submenu>
+          <span title>
+            <i nz-icon type="dollar"></i>
+            <span>交易管理</span>
+          </span>
+      <ul>
+        <li nz-menu-item routerLink="/history">交易记录</li>
+        <li nz-menu-item routerLink="/analysis">交易分析</li>
+      </ul>
+    </li>
+    <li nz-menu-item routerLink="/certificate">
+      <span title>
+        <i nz-icon type="property-safety"></i>
+        <span>证书管理</span>
+      </span>
+    </li>
+    <li nz-menu-item>
+      <span title>
+        <i nz-icon type="solution"></i>
+        <span>报表管理</span>
+      </span>
+    </li>
+  </ul>
+</div>

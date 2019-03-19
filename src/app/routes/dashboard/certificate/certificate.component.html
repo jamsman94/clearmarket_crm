@@ -1,0 +1,80 @@
+<div class="CM-default__content-title">
+  <h1>
+    证书管理
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<button nz-button nzType="primary"
+  *ngIf="tokenService.platform === 1000"
+  (click)="createNewCertificate(CreateFormTemplate)">创建新证书</button>
+<nz-table
+  [nzData]=renderList
+  [nzFrontPagination]=false
+  [nzLoading]=loading
+  [nzTotal]=total
+  (nzPageIndexChange)="queryCertificateByPage($event)">
+  <thead>
+  <tr>
+    <th>证书名称</th>
+    <th>所属公司</th>
+    <th>公司所在城市</th>
+    <th>签署公司</th>
+    <th>创建时间</th>
+    <th>到期时间</th>
+    <th>证书操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of renderList">
+    <td>{{data.commonName}}</td>
+    <td>{{data.vendor}}</td>
+    <td>{{data.city}}</td>
+    <td>{{data.company}}</td>
+    <td>{{data.createDate | date}}</td>
+    <td>{{data.validityDate | date}}</td>
+    <td>
+      <button nz-button nzType="primary"
+              (click)="downloadCertificate(data.caesarId)">下载证书</button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button nz-button nzType="primary"
+              *ngIf="tokenService.platform === 1000"
+              (click)="extendCertificate(data.caesarId)">延长证书</button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button nz-button nzType="danger"
+              *ngIf="tokenService.platform === 1000"
+              (click)="deleteCertificate(data.caesarId)">吊销证书</button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<ng-template #CreateFormTemplate>
+  <form nz-form [formGroup]="createForm" class="login-form">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          节点名称：
+          <input type="text" nz-input formControlName="commonName" placeholder="节点名称">
+        </nz-input-group>
+        <nz-form-explain *ngIf="createForm.get('commonName').dirty && createForm.get('commonName').errors">请输入节点名称</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          节点所属公司：
+          <input type="text" nz-input formControlName="vendor" placeholder="节点所属公司">
+        </nz-input-group>
+        <nz-form-explain *ngIf="createForm.get('vendor').dirty && createForm.get('vendor').errors">请输入公司名称</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          节点所在城市：
+          <input type="text" nz-input formControlName="city" placeholder="节点所在城市">
+        </nz-input-group>
+        <nz-form-explain *ngIf="createForm.get('city').dirty && createForm.get('city').errors">请输入节点所在公司</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>

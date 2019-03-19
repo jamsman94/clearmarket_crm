@@ -1,0 +1,20 @@
+<div class="CM-default__sidebar-inner">
+  <nz-dropdown nzTrigger="click" class="CM-default__sidebar-user">
+    <div nz-dropdown class="user-block-dropdown">
+      <nz-avatar class="alain-default__aside-user-avatar" nzText="U" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+      <div class="alain-default__aside-user-info">
+        <strong>{{username}}</strong>
+        <nz-dropdown>
+          <p class="text-truncate mb0" nz-dropdown>TH@tophold.com</p>
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>
+              <a (click)=logout()>退出登录</a>
+            </li>
+          </ul>
+        </nz-dropdown>
+      </div>
+    </div>
+  </nz-dropdown>
+  <sidebar-nav class="d-block py-lg"></sidebar-nav>
+</div>
+

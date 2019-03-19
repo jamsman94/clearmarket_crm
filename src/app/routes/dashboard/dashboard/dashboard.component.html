@@ -1,0 +1,227 @@
+<div class="CM-default__content-title" *ngIf="tokenService.platform === 1000">
+  <h1>
+    Clear Markets管理员{{tokenService.userName}}
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<div class="CM-default__content-title" *ngIf="tokenService.platform !== 1000">
+  <h1>
+    {{tokenService.platform}}管理员{{tokenService.userName}}
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<div class="CM-default__content-subtitle">
+  <div class="CM-default__content--subtitle--stats">
+    <nz-row [nzGutter]="16">
+      <nz-col [nzSpan]="5">
+        <nz-statistic [nzValue]="platformInfo.platformCnName" [nzTitle]="'平台中文名称'"></nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="5">
+        <nz-statistic [nzValue]="platformInfo.platformEnName" [nzTitle]="'平台英文名称'"></nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="5">
+        <nz-statistic [nzValue]="tokenService.platform | number" [nzTitle]="'平台ID'"></nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="5" *ngIf="tokenService.platform !== 1000">
+        <nz-statistic [nzValue]="'A'" [nzTitle]="'评级'"></nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="4">
+        <nz-statistic [nzValue]="tokenService.updateTime | date" [nzTitle]="'更新时间'"></nz-statistic>
+      </nz-col>
+    </nz-row>
+    <nz-divider nzType="horizontal"></nz-divider>
+    <div style="padding: 0;" *ngIf="tokenService.platform === 1000">
+      <nz-row [nzGutter]="16">
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="platformInfo.platformCount"
+              [nzTitle]="'平台用户数'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="'40%'"
+              [nzTitle]="'A级平台'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="1800"
+              [nzTitle]="'平台保证金'"
+              [nzPrefix]="'$'"
+              [nzSuffix]="'亿'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="600"
+              [nzTitle]="'用户可取资金和'"
+              [nzPrefix]="'$'"
+              [nzSuffix]="'亿'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="'300%'"
+              [nzTitle]="'现金保障比'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="2.47"
+              [nzSuffix]="'百万'"
+              [nzTitle]="'累计交易次数'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="187"
+              [nzPrefix]="'$'"
+              [nzTitle]="'累计交易量'"
+              [nzSuffix]="'亿'">
+            </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+            <nz-statistic
+              [nzValue]="'99%'"
+              [nzTitle]="'交易执行质量'">
+            </nz-statistic>
+        </nz-col>
+      </nz-row>
+    </div>
+    <div style="padding: 0;" *ngIf="tokenService.platform !== 1000">
+      <nz-row [nzGutter]="16">
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="1800"
+            [nzTitle]="'平台保证金'"
+            [nzPrefix]="'$'"
+            [nzSuffix]="'亿'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="600"
+            [nzTitle]="'用户可取资金和'"
+            [nzPrefix]="'$'"
+            [nzSuffix]="'亿'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="'300%'"
+            [nzTitle]="'现金保障比'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="300"
+            [nzTitle]="'用户入金和'"
+            [nzPrefix]="'$'"
+            [nzSuffix]="'亿'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="100"
+            [nzTitle]="'用户出金和'"
+            [nzPrefix]="'$'"
+            [nzSuffix]="'亿'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="400"
+            [nzTitle]="'点差收益'"
+            [nzPrefix]="'$'"
+            [nzSuffix]="'亿'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="200"
+            [nzTitle]="'隔夜费收益'"
+            [nzPrefix]="'$'"
+            [nzSuffix]="'亿'">
+          </nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="3">
+          <nz-statistic
+            [nzValue]="'99%'"
+            [nzTitle]="'交易执行质量'">
+          </nz-statistic>
+        </nz-col>
+      </nz-row>
+    </div>
+    <nz-divider nzType="horizontal"></nz-divider>
+  </div>
+  <div class="charts__content">
+    <div class="CM-default__content--dashboard_graph">
+      <h3>交易次数</h3>
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+    <div class="CM-default__content--dashboard_graph" *ngIf="tokenService.platform === 1000">
+      <h3>各平台累计交易量占比</h3>
+      <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+      </canvas>
+    </div>
+  </div>
+  <nz-divider nzType="horizontal"></nz-divider>
+  <div class="CM-default__content--subtitle--stats">
+    <nz-row [nzGutter]="16">
+      <nz-col [nzSpan]="3">
+        <nz-statistic
+          [nzValue]="platformInfo.verifyCount"
+          [nzTitle]="'认证账户数'">
+        </nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="3">
+        <nz-statistic
+          [nzValue]="platformInfo.userProp"
+          [nzSuffix]="'%'"
+          [nzTitle]="'认证账户占比'">
+        </nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="3">
+        <nz-statistic
+          [nzValue]="platformInfo.reportCount"
+          [nzTitle]="'举报账户数'">
+        </nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="3">
+        <nz-statistic
+          [nzValue]="platformInfo.reportProp"
+          [nzTitle]="'举报账户占比'"
+          [nzSuffix]="'%'">
+        </nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="4">
+        <nz-statistic
+          [nzValue]="platformInfo.highRiskUser"
+          [nzTitle]="'当前极高风险账户数'">
+        </nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="4">
+        <nz-statistic
+          [nzValue]="platformInfo.riskUser"
+          [nzTitle]="'当前高风险账户数'">
+        </nz-statistic>
+      </nz-col>
+      <nz-col [nzSpan]="3">
+        <nz-statistic
+          [nzValue]="platformInfo.riskUser"
+          [nzTitle]="'当前风险账户占比'"
+          [nzSuffix]="'%'">
+        </nz-statistic>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

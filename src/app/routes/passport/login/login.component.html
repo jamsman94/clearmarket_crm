@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <input type="text" nz-input formControlName="platformId" placeholder="Platform ID">
+      </nz-input-group>
+      <nz-form-explain *ngIf="loginForm.get('platformId').dirty && loginForm.get('platformId').errors">Please input your Platform ID!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <input type="text" nz-input formControlName="oprId" placeholder="UserName">
+      </nz-input-group>
+      <nz-form-explain *ngIf="loginForm.get('oprId').dirty && loginForm.get('oprId').errors">Please input your username!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group>
+        <input type="password" nz-input formControlName="oprPwd" placeholder="Password">
+      </nz-input-group>
+      <nz-form-explain *ngIf="loginForm.get('oprPwd').dirty && loginForm.get('oprPwd').errors">Please input your Password!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <label nz-checkbox formControlName="remember">
+        <span>Remember me</span>
+      </label>
+      <a class="login-form-forgot">Forgot password</a>
+      <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

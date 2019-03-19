@@ -1,0 +1,34 @@
+<div class="CM-default__content-title">
+  <h1>
+    信息管理 -- 评级管理
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<h3 *ngIf="tokenService.platform !== 1000">当前评级为A</h3>
+<div class="CM-default__content-datatable">
+  <nz-table
+    [nzData]=renderList
+    [nzFrontPagination]=false
+    [nzLoading]=loading
+    [nzTotal]=total
+    (nzPageIndexChange)="queryRatingsInfo($event)">
+    <thead>
+    <tr>
+      <th>平台名称</th>
+      <th>评级</th>
+      <th>现金保障比例</th>
+      <th>交易执行质量</th>
+      <th>更新时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of renderList">
+      <td>{{data.platformName}}</td>
+      <td>{{data.rate}}</td>
+      <td>{{data.coverage}}%</td>
+      <td>{{data.execution}}</td>
+      <td>{{data.timestamp | date}}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

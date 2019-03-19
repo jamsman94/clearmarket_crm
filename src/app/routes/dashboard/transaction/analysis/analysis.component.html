@@ -1,0 +1,18 @@
+<div class="CM-default__content-title">
+  <h1>
+    交易管理 -- 交易分析
+    <small>欢迎您！</small>
+  </h1>
+</div>
+<div class="CM-default__content-subtitle">
+  <div class="chart--tx_analysis">
+    <h2>交易次数</h2>
+    <canvas baseChart
+            [datasets]="tradeAmountData"
+            [labels]="barChartLabels"
+            [chartType]="barChartType">
+    </canvas>
+  </div>
+  <nz-divider nzType="horizontal"></nz-divider>
+</div>
+

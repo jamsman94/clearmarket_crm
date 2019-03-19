@@ -1,0 +1,33 @@
+.CM-header_logo{
+  margin-left: -16px;
+  width: 200px;
+  transition: width 0.2s cubic-bezier(0.25, 0, 0.15, 1);
+}
+.CM-header_logo-link {
+  display: block;
+  text-align: center;
+}
+.CM-header_logo-expanded,
+.CM-header_logo-collapsed {
+  vertical-align: middle;
+  max-width: 100%;
+  animation: fadeIn 1s;
+}
+.CM-header_logo-collapsed {
+  display: none;
+}
+.CM-header_logo-expanded {
+  display: inline;
+}
+
+@media (max-width: 767px) {
+  .CM-header_logo {
+    width: 64px;
+  }
+  .CM-header_logo-collapsed {
+    display: inline;
+  }
+  .CM-header_logo-expanded {
+    display: none;
+  }
+}
