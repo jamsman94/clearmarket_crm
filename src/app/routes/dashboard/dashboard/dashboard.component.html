@@ -185,7 +185,7 @@
       </nz-col>
       <nz-col [nzSpan]="3">
         <nz-statistic
-          [nzValue]="platformInfo.userProp| number "
+          [nzValue]=" platformInfo.userProp| number "
           [nzSuffix]="'%'"
           [nzTitle]="'认证账户占比'">
         </nz-statistic>
@@ -198,7 +198,7 @@
       </nz-col>
       <nz-col [nzSpan]="3">
         <nz-statistic
-          [nzValue]="platformInfo.reportProp"
+          [nzValue]="platformInfo.reportProp | number"
           [nzTitle]="'举报账户占比'"
           [nzSuffix]="'%'">
         </nz-statistic>
