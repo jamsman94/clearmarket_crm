@@ -185,7 +185,7 @@
       </nz-col>
       <nz-col [nzSpan]="3">
         <nz-statistic
-          [nzValue]="platformInfo.userProp"
+          [nzValue]="platformInfo.userProp| number "
           [nzSuffix]="'%'"
           [nzTitle]="'认证账户占比'">
         </nz-statistic>

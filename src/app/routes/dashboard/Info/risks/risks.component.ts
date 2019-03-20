@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./risks.component.less']
 })
 export class RisksComponent implements OnInit {
+  renderList = [];
+  total = 0;
+
 
   constructor() { }
 
