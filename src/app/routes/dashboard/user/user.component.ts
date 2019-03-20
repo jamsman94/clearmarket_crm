@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {TokenService} from '../../../service/token.service';
 import {test_api_addr} from '../../../common/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -33,7 +33,8 @@ export class UserComponent implements OnInit {
     private modalService: NzModalService,
     private tokenService: TokenService,
     private fb: FormBuilder,
-    private platformInfo: PlatformInfoService
+    private platformInfo: PlatformInfoService,
+    private notificationService: NzNotificationService
   ) { }
 
   ngOnInit() {
@@ -49,6 +50,12 @@ export class UserComponent implements OnInit {
       oprId: [ null, [ Validators.required ] ],
       platformId: [ null, [ Validators.required ] ],
       roleId: [ null, [ Validators.required ] ],
+    });
+    this.passwordForm = this.fb.group({
+      newPwd: [ null, [ Validators.required ] ],
+      oprId: [ null, [ Validators.required ] ],
+      platformId: [ null, [ Validators.required ] ],
+      oldPwd: [ null, [ Validators.required ] ],
     });
     this.queryUserByPage(1);
   }
@@ -90,6 +97,7 @@ export class UserComponent implements OnInit {
       requestBody
     ).subscribe(() => {
       this.queryUserByPage(1);
+      this.createForm.reset();
     });
   }
   queryPlatformList() {
@@ -133,6 +141,60 @@ export class UserComponent implements OnInit {
       requestBody
     ).subscribe(() => {
       this.queryUserByPage(1);
+      this.editForm.reset();
+    });
+  }
+  handlePwdChange(template, editplat, editId) {
+    this.editOprId = editId;
+    this.editPlatId = editplat;
+    this.modalService.create({
+      nzTitle: '修改操作员密码',
+      nzContent: template,
+      nzOnOk: () => new Promise((resolve => {
+        setTimeout(resolve, 1000);
+        this.updatePassword();
+      }))
+    });
+  }
+  updatePassword() {
+    const requestBody = {
+      oprId: this.editOprId,
+      platformId: this.editPlatId,
+      oldPwd: sha256(this.passwordForm.value.oldPwd),
+      newPwd: sha256(this.passwordForm.value.newPwd)
+    };
+    this.http.post(
+      test_api_addr.operatorPassword,
+      requestBody
+    ).subscribe((data: any) => {
+      if (data.status === 1) {
+        this.notificationService.success(
+          '操作成功',
+          '密码已更改'
+        );
+      }
+      this.queryUserByPage(1);
+      this.passwordForm.reset();
+    });
+  }
+  handleDelete(platId, oprId) {
+    this.modalService.info({
+      nzTitle: '将要删除操作员',
+      nzContent: '该操作员将会被删除，此操作不可撤销，请确认！',
+      nzOnOk: () => new Promise((resolve => {
+        setTimeout(resolve, 1000);
+        this.http.delete(
+          test_api_addr.deleteOperator + '/' + platId + '/' + oprId
+        ).subscribe((data: any) => {
+          if (data.status === 1) {
+            this.notificationService.success(
+              '操作成功',
+              '操作员已删除'
+            );
+          }
+          this.queryUserByPage(1);
+        });
+      }))
     });
   }
 }

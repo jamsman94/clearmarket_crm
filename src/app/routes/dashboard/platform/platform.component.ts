@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {TokenService} from '../../../service/token.service';
 import {test_api_addr} from '../../../common/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NzModalRef, NzModalService} from 'ng-zorro-antd';
+import {NzModalRef, NzModalService, NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-platform',
@@ -22,7 +22,8 @@ export class PlatformComponent implements OnInit {
     private http: HttpClient,
     private tokenService: TokenService,
     private fb: FormBuilder,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private notificationService: NzNotificationService
   ) { }
 
   ngOnInit() {
@@ -85,7 +86,13 @@ export class PlatformComponent implements OnInit {
         setTimeout(resolve, 1000);
         this.http.delete(
           test_api_addr.deletePlatEntry + '/' + platId
-        ).subscribe((data) => {
+        ).subscribe((data: any) => {
+          if (data.status === 1) {
+            this.notificationService.success(
+              '操作成功',
+              '平台已删除'
+            );
+          }
           this.queryPlatform(1);
         });
       }))

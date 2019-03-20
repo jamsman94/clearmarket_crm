@@ -13,6 +13,7 @@ import {RoleComponent} from './dashboard/role/role.component';
 import {CertificateComponent} from './dashboard/certificate/certificate.component';
 import {VerificationComponent} from './dashboard/Info/verification/verification.component';
 import {UserComponent} from './dashboard/user/user.component';
+import {ReportComponent} from './dashboard/Info/report/report.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'role', component: RoleComponent},
       { path: 'certificate', component: CertificateComponent },
       { path: 'verification', component: VerificationComponent },
-      { path: 'user', component: UserComponent }
+      { path: 'user', component: UserComponent },
+      { path: 'ureport', component: ReportComponent}
     ]
   },
   {
