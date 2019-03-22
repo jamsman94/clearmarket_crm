@@ -1,9 +1,9 @@
 // 基础API地址
 // TODO 增加环境判断条件
-const base_url = '139.196.173.182:10355';
+// const base_url = '139.196.173.182:10355';
 // const certificate_base_api = '192.168.1.44:10248';
 const certificate_base_api = '106.15.36.19:10248';
-// const base_url = '192.168.1.44:8080';
+const base_url = '192.168.1.44:8080';
 // 具体API列表
 export const test_api_addr = {
   login: base_url + '/login',

@@ -4,6 +4,7 @@ import {TokenService} from '../../../service/token.service';
 import {test_api_addr} from '../../../common/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzModalRef, NzModalService, NzNotificationService} from 'ng-zorro-antd';
+import {PlatformInfoService} from '../../../service/platform-info.service';
 
 @Component({
   selector: 'app-platform',
@@ -23,7 +24,8 @@ export class PlatformComponent implements OnInit {
     private tokenService: TokenService,
     private fb: FormBuilder,
     private modalService: NzModalService,
-    private notificationService: NzNotificationService
+    private notificationService: NzNotificationService,
+    private platformInfo: PlatformInfoService
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,8 @@ export class PlatformComponent implements OnInit {
   queryPlatform(pg: number) {
     this.loading = true;
     const queryBody = {
-      page: pg
+      page: pg,
+      rename: this.platformInfo.platformRename
     };
     this.http.post(
       test_api_addr.queryPlatInfo,

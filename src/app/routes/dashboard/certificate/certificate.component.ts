@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PlatformInfoService} from '../../../service/platform-info.service';
 import {TokenService} from '../../../service/token.service';
-import {certificate_api} from '../../../common/API';
+import {certificate_api, test_api_addr} from '../../../common/API';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -16,6 +16,7 @@ export class CertificateComponent implements OnInit {
   loading = true;
   total = 0;
   createForm: FormGroup;
+  platformList = [];
 
   constructor(
     private http: HttpClient,
@@ -93,6 +94,13 @@ export class CertificateComponent implements OnInit {
       requestBody
     ).subscribe(() => {
       this.queryCertificateByPage(1);
+    });
+  }
+  queryPlatformList() {
+    this.http.get(
+      test_api_addr.platformAll
+    ).subscribe((data: any) => {
+      this.platformList = data.data;
     });
   }
 }

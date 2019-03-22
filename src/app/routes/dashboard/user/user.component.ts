@@ -101,12 +101,19 @@ export class UserComponent implements OnInit {
     });
   }
   queryPlatformList() {
-    this.http.get(
-      test_api_addr.platformAll
-    ).subscribe((data: any) => {
-      this.platformList = data.data;
-      console.log(this.platformList);
-    });
+    if (this.tokenService.platform === 1000) {
+      this.http.get(
+        test_api_addr.platformAll
+      ).subscribe((data: any) => {
+        this.platformList = data.data;
+      });
+    } else {
+      this.http.get(
+        test_api_addr.platformList + '/' + this.tokenService.platform
+      ).subscribe((data: any) => {
+        this.platformList = data.data;
+      });
+    }
   }
   queryRoleList(platformId) {
     this.http.get(

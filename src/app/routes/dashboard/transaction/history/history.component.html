@@ -23,12 +23,12 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of renderList">
-    <td>{{data.transactionId}}</td>
-    <td>{{data.cpTransactionId}}</td>
-    <td>{{data.productCode}}</td>
-    <td>{{data.qty}}</td>
-    <td>{{data.priceUSD}}</td>
-    <td>{{data.timestamp | date}}</td>
+    <td>{{ data.transactionId }}</td>
+    <td>{{ data.cpTransactionId }}</td>
+    <td>{{ data.productCode }}</td>
+    <td>{{ data.qty }}</td>
+    <td>{{ data.priceUSD | number }}</td>
+    <td>{{ data.timestamp | date }}</td>
     <td>天厚</td>
     <td>99%</td>
   </tr>
