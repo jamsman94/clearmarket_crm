@@ -92,7 +92,7 @@ export class ErrorInterceptor implements HttpInterceptor{
     return of(evt);
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const url = 'http://' + req.url + '/';
+    const url = 'https://' + req.url + '/';
     const newReq = req.clone({url});
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {

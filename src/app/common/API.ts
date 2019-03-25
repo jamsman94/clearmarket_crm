@@ -3,9 +3,9 @@
 // const base_url = '139.196.173.182:10355';
 // const certificate_base_api = '192.168.1.44:10248';
 // const certificate_base_api = '106.15.36.19:10248';
-const certificate_base_api = 'https://cm-crm-api-caesar.tophold.com/';
+const certificate_base_api = 'cm-crm-api-caesar.tophold.com';
 // const base_url = '192.168.1.44:8080';
-const base_url = 'https://cm-crm-api.tophold.com/';
+const base_url = 'cm-crm-api.tophold.com';
 // 具体API列表
 export const test_api_addr = {
   login: base_url + '/login',
