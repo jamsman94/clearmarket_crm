@@ -13,20 +13,17 @@
 <div class="CM-default__content-subtitle">
   <div class="CM-default__content--subtitle--stats">
     <nz-row [nzGutter]="16">
-      <nz-col [nzSpan]="5">
+      <nz-col [nzSpan]="6">
         <nz-statistic [nzValue]="platformInfo.platformCnName" [nzTitle]="'平台中文名称'"></nz-statistic>
       </nz-col>
-      <nz-col [nzSpan]="5">
+      <nz-col [nzSpan]="6">
         <nz-statistic [nzValue]="platformInfo.platformEnName" [nzTitle]="'平台英文名称'"></nz-statistic>
       </nz-col>
-      <nz-col [nzSpan]="5">
+      <nz-col [nzSpan]="6">
         <nz-statistic [nzValue]="tokenService.platform | number" [nzTitle]="'平台ID'"></nz-statistic>
       </nz-col>
-      <nz-col [nzSpan]="5" *ngIf="tokenService.platform !== 1000">
+      <nz-col [nzSpan]="6" *ngIf="tokenService.platform !== 1000">
         <nz-statistic [nzValue]="'A'" [nzTitle]="'评级'"></nz-statistic>
-      </nz-col>
-      <nz-col [nzSpan]="4">
-        <nz-statistic [nzValue]="tokenService.updateTime | date" [nzTitle]="'更新时间'"></nz-statistic>
       </nz-col>
     </nz-row>
     <nz-divider nzType="horizontal"></nz-divider>
@@ -205,19 +202,19 @@
       </nz-col>
       <nz-col [nzSpan]="4">
         <nz-statistic
-          [nzValue]="platformInfo.highRiskUser"
+          [nzValue]="platformInfo.highRisk"
           [nzTitle]="'当前极高风险账户数'">
         </nz-statistic>
       </nz-col>
       <nz-col [nzSpan]="4">
         <nz-statistic
-          [nzValue]="platformInfo.riskUser"
+          [nzValue]="platformInfo.risk"
           [nzTitle]="'当前高风险账户数'">
         </nz-statistic>
       </nz-col>
       <nz-col [nzSpan]="3">
         <nz-statistic
-          [nzValue]="platformInfo.riskUser"
+          [nzValue]="platformInfo.riskProp | number"
           [nzTitle]="'当前风险账户占比'"
           [nzSuffix]="'%'">
         </nz-statistic>

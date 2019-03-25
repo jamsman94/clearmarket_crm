@@ -6,8 +6,9 @@ import { Injectable } from '@angular/core';
 export class PlatformInfoService {
   userProp: number;
   verifyCount: number;
-  highRiskUser: number;
-  riskUser: number;
+  highRisk: number;
+  risk: number;
+  riskProp: number;
   reportCount: number;
   reportProp: number;
   platformCnName: string;
@@ -18,13 +19,14 @@ export class PlatformInfoService {
   clear() {
     this.userProp = null;
     this.verifyCount = null;
-    this.highRiskUser = null;
-    this.riskUser = null;
+    this.highRisk = null;
+    this.risk = null;
     this.reportCount = null;
     this.reportProp = null;
     this.platformCnName = null;
     this.platformEnName = null;
     this.platformCount = null;
     this.platformRename = null;
+    this.riskProp = null;
   }
 }

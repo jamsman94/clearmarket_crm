@@ -43,10 +43,11 @@ export class DashboardComponent implements OnInit {
         this.platformInfo.userProp = data.data.userProp;
         this.platformInfo.platformCount = data.data.platformCount;
         this.platformInfo.verifyCount = data.data.verifyCount;
-        this.platformInfo.highRiskUser = data.data.highRiskUser;
-        this.platformInfo.riskUser = data.data.riskUser;
+        this.platformInfo.highRisk = data.data.highRisk;
+        this.platformInfo.risk = data.data.risk;
         this.platformInfo.reportCount = data.data.reportCount;
         this.platformInfo.reportProp = data.data.reportProp;
+        this.platformInfo.riskProp = data.data.riskProp;
       });
   }
 
