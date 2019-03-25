@@ -4,6 +4,7 @@ import {NzModalRef, NzModalService} from 'ng-zorro-antd';
 import {TokenService} from '../../../service/token.service';
 import {test_api_addr} from '../../../common/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PlatformInfoService} from '../../../service/platform-info.service';
 
 @Component({
   selector: 'app-role',
@@ -18,12 +19,17 @@ export class RoleComponent implements OnInit {
   createForm: FormGroup;
   editForm: FormGroup;
   editPlatId: number;
+  platformList = [{
+    platformId: this.tokenService.platform,
+    reName: this.platformInfo.platformRename
+  }];
 
   constructor(
     private http: HttpClient,
     private modalService: NzModalService,
     private tokenService: TokenService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private platformInfo: PlatformInfoService
   ) { }
 
   ngOnInit() {
@@ -42,6 +48,7 @@ export class RoleComponent implements OnInit {
     });
   }
   handleNew(template) {
+    this.queryPlatformList();
     this.tplModal = this.modalService.create({
       nzTitle: '新建权限组',
       nzContent: template,
@@ -127,5 +134,20 @@ export class RoleComponent implements OnInit {
         });
       }))
     });
+  }
+  queryPlatformList() {
+    if (this.tokenService.platform === 1000) {
+      this.http.get(
+        test_api_addr.platformAll
+      ).subscribe((data: any) => {
+        this.platformList = data.data;
+      });
+    } else {
+      this.http.get(
+        test_api_addr.platformList + '/' + this.tokenService.platform
+      ).subscribe((data: any) => {
+        this.platformList = data.data;
+      });
+    }
   }
 }

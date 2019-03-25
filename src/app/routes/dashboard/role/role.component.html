@@ -46,11 +46,12 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <nz-input-group>
-          平台ID：
-          <input type="text" nz-input formControlName="platformId" placeholder="平台ID">
-        </nz-input-group>
-        <nz-form-explain *ngIf="createForm.get('platformId').dirty && createForm.get('platformId').errors">请输入平台ID</nz-form-explain>
+        平台名称：
+        <nz-select formControlName="platformId" nzPlaceHolder="请选择平台" required="true" (ngModelChange)="queryRoleList(createForm.value.platformId)">
+          <nz-option *ngFor="let plat of platformList"
+                     nzValue="{{plat.platformId}}"
+                     nzLabel="{{plat.rename}}"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
